@@ -103,7 +103,7 @@ Navigate → **POST /query → Try it out**
 
 ## 🔧 Production Architecture
 
-![Uploading mermaid-diagram.png…]()
+<img width="811" height="1552" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/41c51d47-2082-495e-9321-73eb2d39d9c1" />
 
 
 graph TB
@@ -136,7 +136,7 @@ Overall: 0 items contribute to pipeline visibility.
 ## ⚙️ Tech Stack
 
 ```
-Frontend: None (API-first)
+Frontend: Html (API-first)
 Backend: FastAPI + Python 3.11
 Database: None (Live API only)
 Deployment: Render.com (auto-scales)
