@@ -23,7 +23,7 @@ async def query_endpoint(request: QueryRequest):
     
     # 0. Block greetings/non-business queries
     greetings = ["hi", "hello", "hey", "how are you", "good morning", "thanks"]
-    meta_queries = ["who are you", "what are you", "help", "features"]
+    meta_queries = ["who are you", "what are you", "help", "features", "what is your name", "what is your role", "what is your job", "what is your purpose", "what tasks you can do"]
     
     message_lower = request.message.lower().strip()
     if any(g in message_lower for g in greetings + meta_queries):
