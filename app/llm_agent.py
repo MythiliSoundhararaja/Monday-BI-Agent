@@ -43,6 +43,16 @@ class LLMAgent:
         """
         text = (message or "").lower()
 
+        # Self-awareness check
+        if any(kw in text for kw in ["who are you", "what can you do", "introduce yourself"]):
+            return {
+                "metric": "meta",
+                "period": "all",
+                "sector": None,
+                "boards_needed": [],
+                "clarification_needed": False,
+            }
+
         metric, boards = self._infer_metric_and_boards(text)
         period = self._infer_period(text)
         sector = self._infer_sector(text)
@@ -115,6 +125,17 @@ class LLMAgent:
         summary = context.get("summary", {})
         data_quality = context.get("data_quality", {})
         
+        # Meta/Self-awareness response
+        if plan.get("metric") == "meta":
+            return (
+                "I am the Monday.com BI Agent. I help you track your business pipeline by fetching live "
+                "data from your Deals and Work Orders boards. You can ask me about:\n\n"
+                "• **Sales Pipeline**: Committed (close date) vs. Expected (tentative).\n"
+                "• **Execution Pipeline**: Work order totals, unbilled values, and receivables.\n"
+                "• **Sector Analysis**: Filtering by Mining, Energy, Powerline, etc.\n"
+                "• **Time Periods**: Comparisons for this month, last quarter, etc."
+            )
+
         # Period formatting: remove 'this_' or 'last_' for cleaner headers
         period_raw = summary.get("period", "unknown")
         period = period_raw.replace("this_", "").replace("last_", "")

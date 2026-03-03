@@ -10,7 +10,8 @@ async def test_scenarios():
     queries = [
         "What's the deal pipeline this quarter?",
         "What are work order receivables for Mining this month?",
-        "Show me pipeline for Energy this quarter."
+        "Show me pipeline for Energy this quarter.",
+        "who are you?"
     ]
 
     for query in queries:
