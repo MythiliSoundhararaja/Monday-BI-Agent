@@ -20,6 +20,17 @@ app.add_middleware(
 async def query_endpoint(request: QueryRequest):
     settings = get_settings()
     trace = []
+    
+    # 0. Block greetings/non-business queries
+    greetings = ["hi", "hello", "hey", "how are you", "good morning", "thanks"]
+    meta_queries = ["who are you", "what are you", "help", "features"]
+    
+    message_lower = request.message.lower().strip()
+    if any(g in message_lower for g in greetings + meta_queries):
+        return QueryResponse(
+            answer="👋 Hi! I'm your Monday.com BI Agent. Ask me about:\n\n💰 **Pipeline**: 'deal pipeline this quarter?'\n📊 **Sectors**: 'Mining work orders?'\n📈 **Receivables**: 'total receivables?'\n\nTry: 'What's our pipeline looking like?'",
+            trace=[TraceStep(step="Greeting", description="Handled casual greeting with capabilities overview.")]
+        )
 
     try:
         # 1. Interpret Question
